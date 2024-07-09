@@ -1,0 +1,110 @@
+//Main file
+package inventory;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @Matthias Maraj
+ */
+public class OnlineShopping {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        Inventory inventory = new Inventory();
+        System.out.print("Enter the number of points: ");
+        int customerPoints = scan.nextInt();
+        
+        System.out.print("Enter the quantity of conditioner to purchase: ");
+        int conditionerQuantity = scan.nextInt();
+        customerPoints = inventory.purchaseConditioner(customerPoints, conditionerQuantity);
+
+        System.out.print("Enter the quantity of Shampoo to purchase: ");
+        int shampooQuantity = scan.nextInt();
+        customerPoints = inventory.purchaseConditioner(customerPoints, conditionerQuantity);
+
+        System.out.print("Enter the quantity of gel to purchase: ");
+        int gelQuantity = scan.nextInt();
+        customerPoints = inventory.purchaseGel(customerPoints, gelQuantity);
+
+        System.out.println("Remaining points after purchases: " + customerPoints);
+
+        scan.close();
+    }
+
+}
+
+
+
+//Inventory.java below
+package inventory;
+
+/**
+ *
+ * @author matth
+ * 
+ */
+class Inventory {
+
+    private int shampooQuantity;
+    private int conditionerQuantity;
+    private int gelQuantity;
+
+    private int shampooPrice;
+    private int conditionerPrice;
+    private int gelPrice;
+
+    public Inventory() {
+        shampooPrice = 10;
+        shampooQuantity = 200;
+
+        gelPrice = 13;
+        gelQuantity = 200;
+
+        conditionerPrice = 14;
+        conditionerQuantity = 200; 
+        
+    }
+
+    public int purchaseShampoo(int customerPoints, int quantity) {
+        
+int totalPrice = quantity * shampooPrice;
+        
+        if (customerPoints >= totalPrice) {
+            shampooQuantity -= quantity;
+            return customerPoints - totalPrice;
+        } else {
+            System.out.println("Not enough points to purchase shampoo.");
+            return customerPoints;
+        }
+    }
+    
+    public int purchaseConditioner(int customerPoints, int quantity) {
+        
+        int totalPrice = quantity * conditionerPrice;
+        
+        if (customerPoints >= totalPrice) {
+            conditionerQuantity -= quantity;
+            return customerPoints - totalPrice;
+        } else {
+            System.out.println("Not enough points to purchase conditioner.");
+            return customerPoints;
+        }
+    }
+    
+    public int purchaseGel(int customerPoints, int quantity) {
+        
+        int totalPrice = quantity * gelPrice;
+        
+        if (customerPoints >= totalPrice) {
+            gelQuantity -= quantity;
+            return customerPoints - totalPrice;
+        } else {
+            System.out.println("Not enough points to purchase gel.");
+            return customerPoints;
+        }
+    }
+}
